@@ -1,0 +1,51 @@
+ICO-PDF
+=======
+
+ico-pdf.py is a script that creates a polyglot output file from ICO and PDF
+input files that is a valid ICO image container as well as a valid PDF
+document.
+
+
+Basic usage
+-----------
+
+# ico-pdf.py input.ico input.pdf output.pdf
+
+output.pdf can be opened with a pdf viewer or renamed to output.ico and
+be opened with an image viewer or web browser.
+
+
+Examples
+--------
+
+Example data is provided in the 'data' directory:
+
+* favicon.ico is an ICO file containing 6 sub-images.
+* document.pdf is a basic PDF document.
+* document.tex is the latex source file for the PDF document.
+* poly.pdf is the polyglot file created from favicon.ico and document.pdf
+  with the command:
+  # ico-pdf.py favicon.ico document.pdf poly.pdf
+* poly.ico is the same file as poly.pdf with only the filename extension
+  changed from pdf to ico.
+
+
+Known constraints
+-----------------
+
+Currently there are three known constraints:
+
+* The input ICO file must not contain more than 63 sub-images.
+* The input PDF file has to have the PDF magic bytes (%PDF) as the first
+  bytes of the file and must not already be overloaded with other metadata.
+* The input PDF file must not be larger than 4GB.
+
+
+License
+-------
+
+All files contained in this repository are licensed under the MIT license.
+See LICENSE for details.
+
+Copyright (c) 2019, tickelton <tickelton@gmail.com>
+
