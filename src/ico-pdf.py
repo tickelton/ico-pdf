@@ -16,14 +16,32 @@ import sys
 import struct
 import logging
 
+# typedef struct
+# {
+#     WORD           idReserved;   // Reserved (must be 0)
+#     WORD           idType;       // Resource Type (1 for icons)
+#     WORD           idCount;      // How many images?
+#     ICONDIRENTRY   idEntries[1]; // An entry for each image (idCount of 'em)
+# } ICONDIR, *LPICONDIR;
 LEN_ICONDIR = 6
 ICONDIR = '<HHH'
-LEN_ICONDIRENTRY = 16
-ICONDIRENTRY = '<BBBBHHII'
-
 ID_RESERVED = 0
 ID_TYPE = 1
 ID_COUNT = 2
+
+# typedef struct
+# {
+#     BYTE        bWidth;          // Width, in pixels, of the image
+#     BYTE        bHeight;         // Height, in pixels, of the image
+#     BYTE        bColorCount;     // Number of colors in image (0 if >=8bpp)
+#     BYTE        bReserved;       // Reserved ( must be 0)
+#     WORD        wPlanes;         // Color Planes
+#     WORD        wBitCount;       // Bits per pixel
+#     DWORD       dwBytesInRes;    // How many bytes in this resource?
+#     DWORD       dwImageOffset;   // Where in the file is this image?
+# } ICONDIRENTRY, *LPICONDIRENTRY;
+LEN_ICONDIRENTRY = 16
+ICONDIRENTRY = '<BBBBHHII'
 BWIDTH = 0
 BHEIGHT = 1
 BCOLORCOUNT = 2
@@ -32,9 +50,21 @@ WPLANES = 4
 WBITCOUNT = 5
 DWBYTESINRES = 6
 DWIMAGEOFFSET = 7
+
+###############################
+# format of PDF stream object #
+###############################
+# 9999 0 obj                  #
+# <<                          #
+# /Length 15                  #
+# >>                          #
+# stream                      #
+# FOOOOOOOOOOOOOO             #
+# endstream                   #
+# endobj                      #
+###############################
 FIRSTFREEID = 0
 OFFSETLASTSTREAM = 1
-
 OBJSTREAM_HEAD = """{} 0 obj <<
 /Length {}       
 >>
